@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linktree creator</title>
+    <link rel="stylesheet" href="../styles/creator.css">
+</head>
+
+<body>
+    <header>
+        <h1>Vamos criar a sua pagina</h1>
+    </header>
+
+    <main>
+        <div class="backgroundSelection">
+            <label for="backgroundType">Tipo de fundo</label>
+            <select name="backgroundType" id="backgroundType">
+                <option value="color">Cor</option>
+                <option value="image">Imagem</option>
+            </select>
+            <div id="color-background">
+                <label for="backgroundColor">Escolha uma cor</label>
+                <input type="color" id="backgroundColor" value="#ffffff">
+            </div>
+            <div id="image-background" hidden>
+                <label for="backgroundImage">Escolha uma imagem</label>
+                <input type="file" id="backgroundImage" accept="image/*">
+            </div>
+        </div>
+        <div class="Titleanssubtitles">
+            <input type="text" name="title" id="title">
+            <input type="text" name="subtitle" id="subtitle">
+        </div>
+        <div class="links">
+            <div id="links-wrapper">
+                <input type="url" name="links[]" placeholder="https://exemplo.com">
+            </div>
+            <button type="button" id="add-link">+ Adicionar link</button>
+        </div>
+        <div class="create">
+            <button type="button" id="create">crie sua pagina!</button>
+        </div>
+    </main>
+
+    <script src="../js/creator.js"></script>
+</body>
+
+</html>
