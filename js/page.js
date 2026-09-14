@@ -60,6 +60,60 @@ function renderBackground(background) {
 }
 
 
+const platformMap = {
+    youtube: { name: 'YouTube', icon: '▶' },
+    instagram: { name: 'Instagram', icon: '◎' },
+    telegram: { name: 'Telegram', icon: '➤' },
+    x: { name: 'X', icon: '𝕏' },
+    whatsapp: { name: 'WhatsApp', icon: '◔' },
+    twitter: { name: 'X', icon: '𝕏' },
+    facebook: { name: 'Facebook', icon: 'f' },
+    github: { name: 'GitHub', icon: '◌' },
+    linkedin: { name: 'LinkedIn', icon: 'in' },
+    spotify: { name: 'Spotify', icon: '♫' },
+    tiktok: { name: 'TikTok', icon: '♪' },
+    discord: { name: 'Discord', icon: '◌' },
+    reddit: { name: 'Reddit', icon: '◉' },
+    default: { name: 'Link', icon: '↗' },
+};
+
+function detectPlatform(url) {
+    if (!url) {
+        return { platform: 'default', ...platformMap.default };
+    }
+
+    try {
+        const normalizedUrl = /^https?:\/\//i.test(url) ? url : `https://${url}`;
+        const { hostname } = new URL(normalizedUrl);
+        const host = hostname.replace(/^www\./i, '').toLowerCase();
+
+        const matchers = [
+            { key: 'youtube', pattern: /(^|\.)youtube\.com$|youtu\.be$/i },
+            { key: 'instagram', pattern: /(^|\.)instagram\.com$/i },
+            { key: 'telegram', pattern: /(^|\.)t\.me$|(^|\.)telegram\.org$/i },
+            { key: 'x', pattern: /(^|\.)x\.com$|(^|\.)twitter\.com$/i },
+            { key: 'whatsapp', pattern: /(^|\.)whatsapp\.com$|(^|\.)wa\.me$/i },
+            { key: 'facebook', pattern: /(^|\.)facebook\.com$/i },
+            { key: 'github', pattern: /(^|\.)github\.com$/i },
+            { key: 'linkedin', pattern: /(^|\.)linkedin\.com$/i },
+            { key: 'spotify', pattern: /(^|\.)spotify\.com$/i },
+            { key: 'tiktok', pattern: /(^|\.)tiktok\.com$/i },
+            { key: 'discord', pattern: /(^|\.)discord\.com$|(^|\.)discord\.gg$/i },
+            { key: 'reddit', pattern: /(^|\.)reddit\.com$/i },
+        ];
+
+        const match = matchers.find(({ pattern }) => pattern.test(host));
+
+        if (match) {
+            return { platform: match.key, ...platformMap[match.key] };
+        }
+    } catch (error) {
+        console.warn('Não foi possível identificar o link:', error);
+    }
+
+    return { platform: 'default', ...platformMap.default };
+}
+
 function renderLinks(links) {
     linksContainer.innerHTML = '';
 
@@ -74,14 +128,33 @@ function renderLinks(links) {
     links.forEach((link, index) => {
         if (!link.url) return;
 
+        const platform = detectPlatform(link.url);
         const button = document.createElement('a');
+        const icon = document.createElement('span');
+        const label = document.createElement('span');
+        const marker = document.createElement('span');
+
         button.className = 'link-button';
+        button.dataset.platform = platform.platform;
         button.href = link.url;
         button.target = '_blank';
         button.rel = 'noopener noreferrer';
-        button.textContent = link.title || link.url;
         button.style.animationDelay = `${index * 50}ms`;
+        button.title = link.title || platform.name;
+        button.setAttribute('aria-label', link.title || platform.name);
 
+        icon.className = 'link-button__icon';
+        icon.setAttribute('aria-hidden', 'true');
+        icon.textContent = platform.icon;
+
+        label.className = 'link-button__label';
+        label.textContent = link.title || platform.name;
+
+        marker.className = 'link-button__marker';
+        marker.setAttribute('aria-hidden', 'true');
+        marker.textContent = '•••';
+
+        button.append(icon, label, marker);
         linksContainer.appendChild(button);
     });
 }
