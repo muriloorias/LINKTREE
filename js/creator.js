@@ -233,8 +233,8 @@ function savePage() {
 
             try {
                 localStorage.setItem(pageStorageKey, JSON.stringify(page));
-                alert('Página salva com sucesso!');
                 console.log('Página salva:', page);
+                window.location.href = 'page.html';
             } catch (error) {
                 console.error(error);
                 alert('Não foi possível salvar a página. A imagem pode ser muito grande.');
@@ -247,8 +247,8 @@ function savePage() {
 
     try {
         localStorage.setItem(pageStorageKey, JSON.stringify(page));
-        alert('Página salva com sucesso!');
         console.log('Página salva:', page);
+        window.location.href = 'page.html';
     } catch (error) {
         console.error(error);
         alert('Não foi possível salvar a página.');

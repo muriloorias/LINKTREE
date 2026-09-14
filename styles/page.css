@@ -115,9 +115,10 @@ body {
 .link-button {
     width: 100%;
     min-height: 4rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr) 2.25rem;
     align-items: center;
-    justify-content: center;
+    gap: 0.35rem;
     padding: 0.55rem 0.75rem;
     color: var(--button-text);
     background: var(--button);
@@ -132,6 +133,30 @@ body {
     transform: translateY(10px);
     animation: showLink 350ms ease forwards;
     transition: transform 180ms ease, box-shadow 180ms ease, background-color 220ms ease, border-color 220ms ease;
+}
+
+.link-button__icon,
+.link-button__marker {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.link-button__marker {
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.link-button__label {
+    min-width: 0;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .link-button:hover {
