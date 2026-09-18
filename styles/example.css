@@ -167,8 +167,22 @@ body {
 }
 
 .links button::before {
-    font-size: 1.1rem;
-    content: "↗";
+    content: "";
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* ícone padrão genérico (seta) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7M17 7H7M17 7v10'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .links button::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23101012' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7M17 7H7M17 7v10'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .links button::before {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23101012' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7M17 7H7M17 7v10'/%3E%3C/svg%3E");
+    }
 }
 
 .links button::after {
@@ -177,24 +191,29 @@ body {
     content: "•••";
 }
 
+/* YouTube */
 .links #youtube::before {
-    content: "▶";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF0000' d='M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z'/%3E%3Cpolygon fill='white' points='9.75,15.02 15.5,12 9.75,8.98'/%3E%3C/svg%3E");
 }
 
+/* Telegram */
 .links #telegram::before {
-    content: "➤";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3ClinearGradient id='a' x1='120' y1='240' x2='120' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%231d93d2'/%3E%3Cstop offset='1' stop-color='%2338b0e3'/%3E%3C/linearGradient%3E%3Ccircle fill='url(%23a)' cx='120' cy='120' r='120'/%3E%3Cpath fill='white' d='M81.2 130.9l-5.6 39.8c-.4 2.7 3 4.2 4.8 2l18.4-19.6 38.5 28.4c6 3.3 10.4.5 11.9-5.5L172 65.6c1.8-7.3-2.7-10.3-8.5-8l-116 44.7c-6.7 2.6-6.6 6.3-.7 8.1l29.8 9.3 69-43.4c3.2-2 6.2-.9 3.8 1.3L81.2 130.9z'/%3E%3C/svg%3E");
 }
 
+/* X (Twitter) */
 .links #x::before {
-    content: "𝕏";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='4' fill='black'/%3E%3Cpath fill='white' d='M17.75 3h3.08l-6.73 7.7L22 21h-6.19l-4.85-6.34L5.46 21H2.37l7.2-8.23L2 3h6.35l4.38 5.73zm-1.08 16.2h1.7L7.45 4.74H5.63z'/%3E%3C/svg%3E");
 }
 
+/* Instagram */
 .links #instagram::before {
-    content: "◎";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3CradialGradient id='ig' cx='30%25' cy='107%25' r='150%25'%3E%3Cstop offset='0' stop-color='%23fdf497'/%3E%3Cstop offset='.05' stop-color='%23fdf497'/%3E%3Cstop offset='.45' stop-color='%23fd5949'/%3E%3Cstop offset='.6' stop-color='%23d6249f'/%3E%3Cstop offset='.9' stop-color='%23285AEB'/%3E%3C/radialGradient%3E%3Crect width='24' height='24' rx='6' fill='url(%23ig)'/%3E%3Ccircle cx='12' cy='12' r='4.5' fill='none' stroke='white' stroke-width='1.8'/%3E%3Ccircle cx='17.5' cy='6.5' r='1.2' fill='white'/%3E%3C/svg%3E");
 }
 
+/* WhatsApp */
 .links #whatsap::before {
-    content: "◔";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%2325D366'/%3E%3Cpath fill='white' d='M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1a8 8 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.4.1-.6l.5-.6c.1-.2.1-.3.2-.5 0-.2 0-.4-.1-.5-.1-.2-.7-1.6-.9-2.2-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.1 2 3.1 5 4.3 2.9 1.1 2.9.7 3.4.7.5 0 1.7-.7 1.9-1.3.2-.7.2-1.2.1-1.3z'/%3E%3C/svg%3E");
 }
 
 .links button:hover {

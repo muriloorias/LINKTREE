@@ -14,6 +14,12 @@ const backgroundImage = document.getElementById('backgroundImage');
 const colorBackground = document.getElementById('color-background');
 const imageBackground = document.getElementById('image-background');
 
+// Foto de perfil
+const profilePhotoInput = document.getElementById('profilePhoto');
+const photoPreview = document.getElementById('photo-preview');
+const removePhotoBtn = document.getElementById('remove-photo');
+const defaultPhotoSrc = '../imgs/usuario.png';
+
 const pageStorageKey = 'linktree-page';
 const themeStorageKey = 'linktree-theme';
 
@@ -147,6 +153,36 @@ backgroundImage.addEventListener('change', () => {
 });
 
 
+// ── Foto de perfil ────────────────────────────────────────────────────────────
+
+function setPhotoPreview(src) {
+    photoPreview.src = src;
+    const isCustom = src !== defaultPhotoSrc;
+    removePhotoBtn.hidden = !isCustom;
+}
+
+profilePhotoInput.addEventListener('change', () => {
+    const file = profilePhotoInput.files[0];
+    if (!file) return;
+
+    const maxSize = 2 * 1024 * 1024; // 2 MB
+    if (file.size > maxSize) {
+        alert('A foto deve ter no máximo 2 MB.');
+        profilePhotoInput.value = '';
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => setPhotoPreview(reader.result);
+    reader.readAsDataURL(file);
+});
+
+removePhotoBtn.addEventListener('click', () => {
+    profilePhotoInput.value = '';
+    setPhotoPreview(defaultPhotoSrc);
+});
+
+
 function addLink(value = '') {
     if (count >= max) {
         alert(`Você pode adicionar no máximo ${max} links.`);
@@ -208,9 +244,14 @@ function getLinks() {
 
 
 function getPageData() {
+    const currentPhotoSrc = photoPreview.src;
+    // Normaliza para URL relativa para não salvar o caminho absoluto de arquivo local
+    const photoValue = currentPhotoSrc.startsWith('data:') ? currentPhotoSrc : null;
+
     return {
         title: titleInput.value.trim(),
         subtitle: subtitleInput.value.trim(),
+        photo: photoValue,
         background: {
             type: backgroundType.value,
             value: backgroundType.value === 'color' ? backgroundColor.value : null,
@@ -270,6 +311,11 @@ function loadPage() {
 
         if (page.subtitle) {
             subtitleInput.value = page.subtitle;
+        }
+
+        // Foto de perfil
+        if (page.photo) {
+            setPhotoPreview(page.photo);
         }
 
         if (page.background) {

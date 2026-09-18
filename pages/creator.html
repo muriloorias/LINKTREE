@@ -30,9 +30,20 @@
                 <input type="file" id="backgroundImage" accept="image/*">
             </div>
         </div>
+        <div class="profilePhoto">
+            <div class="photo-preview-wrapper">
+                <img id="photo-preview" src="../imgs/usuario.png" alt="Foto de perfil" width="96" height="96">
+                <label for="profilePhoto" class="photo-upload-label" title="Alterar foto">
+                    <span aria-hidden="true">📷</span>
+                    <span class="visually-hidden">Escolher foto de perfil</span>
+                </label>
+            </div>
+            <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" class="visually-hidden">
+            <button type="button" id="remove-photo" hidden>Remover foto</button>
+        </div>
         <div class="Titleanssubtitles">
-            <input type="text" name="title" id="title">
-            <input type="text" name="subtitle" id="subtitle">
+            <input type="text" name="title" id="title" placeholder="Seu nome">
+            <input type="text" name="subtitle" id="subtitle" placeholder="Sua bio">
         </div>
         <div class="links">
             <div id="links-wrapper">

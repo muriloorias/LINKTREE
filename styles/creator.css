@@ -166,6 +166,83 @@ main {
     color: var(--text-secondary);
 }
 
+/* Foto de Perfil */
+.profilePhoto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.profilePhoto::before {
+    content: "Foto de perfil";
+    align-self: flex-start;
+    font-size: 0.84rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+}
+
+.photo-preview-wrapper {
+    position: relative;
+    width: 6.5rem;
+    height: 6.5rem;
+}
+
+.photo-preview-wrapper img {
+    width: 6.5rem;
+    height: 6.5rem;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--border-color);
+    background: var(--input-bg);
+    display: block;
+    transition: border-color 180ms ease, filter 180ms ease;
+}
+
+.photo-upload-label {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0);
+    font-size: 1.6rem;
+    opacity: 0;
+    transition: background 180ms ease, opacity 180ms ease;
+}
+
+.photo-preview-wrapper:hover .photo-upload-label,
+.photo-preview-wrapper:focus-within .photo-upload-label {
+    background: rgba(0, 0, 0, 0.42);
+    opacity: 1;
+}
+
+.photo-preview-wrapper:hover img {
+    filter: brightness(0.75);
+    border-color: var(--input-focus-border);
+}
+
+#remove-photo {
+    padding: 0.3rem 0.9rem;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--danger-color);
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+#remove-photo:hover {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: var(--danger-color);
+}
+
 /* Inputs e Selects */
 input[type="text"],
 input[type="url"],
